@@ -8,6 +8,7 @@ Landing page for Mustang Market. Hosted on **Cloudflare Pages**.
 3. Upload a folder containing:
    - `index.html`
    - any assets (e.g. `assets/`, `favicon.ico`)
+   - `avicon.ico` in `/app`
 4. Click **Deploy**
 
 ## Attach the custom domain
