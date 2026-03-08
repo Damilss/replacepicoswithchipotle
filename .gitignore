@@ -4,3 +4,6 @@
 !.dev.vars.example
 .env*
 !.env.example
+
+#mac stuff
+.DS_Store
