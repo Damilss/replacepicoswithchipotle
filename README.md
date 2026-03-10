@@ -2,20 +2,40 @@
 
 Landing page for Mustang Market. Hosted on **Cloudflare Pages**.
 
-## Deploy (Cloudflare Pages — Direct Upload)
-1. Cloudflare Dashboard → **Pages** → **Create a project**
-2. Choose **Direct Upload**
-3. Upload a folder containing:
-   - `index.html`
-   - any assets (e.g. `assets/`, `favicon.ico`)
-   - `avicon.ico` in `/app`
-4. Click **Deploy**
+## Cloudflare setup (hosting + Worker routing + HTTPS)
 
-## Attach the custom domain
-1. Open the Pages project → **Custom domains**
-2. Add:
-   - `replacepicoswithchipotle.com`
-   - (optional) `www.replacepicoswithchipotle.com`
+This project is served by a **Cloudflare Worker** and mapped to the custom domain via **Workers Routes**.
+
+### 1) DNS (proxy/orange cloud)
+Cloudflare Dashboard → `replacepicoswithchipotle.com` → **DNS → Records**
+
+Ensure these records exist and are **Proxied (orange cloud)**:
+
+- `A`  **@** → `192.0.2.1`  *(placeholder “no origin” IP)*
+- `A`  **www** → `192.0.2.1`  *(or `CNAME www → @`)*
+- (Optional) `A` **\*** → `192.0.2.1` *(only if you want any subdomain to work)*
+
+> Proxied DNS is required so Cloudflare can run the Worker and redirect/HTTPS logic at the edge.
+
+### 2) Worker routing (attach the domain to the Worker)
+Cloudflare Dashboard → `replacepicoswithchipotle.com` → **Workers Routes**
+
+Create routes pointing to the Worker `replacepicoswithchipotle`:
+
+- `replacepicoswithchipotle.com/*`  *(root domain)*
+- `*.replacepicoswithchipotle.com/*` *(all subdomains, including `www`)*
+
+### 3) HTTPS / “Not secure” fix
+Cloudflare Dashboard → `replacepicoswithchipotle.com` → **SSL/TLS → Edge Certificates**
+
+- ✅ Enable **Always Use HTTPS**
+- ✅ (Optional) Enable **Automatic HTTPS Rewrites**
+
+This forces `http://` to upgrade to `https://` so browsers show the secure lock.
+
+### 4) Verify
+- `https://replacepicoswithchipotle.com`
+- `https://www.replacepicoswithchipotle.com`
 3. Cloudflare will create/update DNS automatically.
 
 ## Local preview
