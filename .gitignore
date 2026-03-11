@@ -1,9 +1,12 @@
+node_modules/
+.next/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+
 # wrangler files
 .wrangler
 .dev.vars*
 !.dev.vars.example
-.env*
-!.env.example
-
-#mac stuff
-.DS_Store
