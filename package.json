@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "npx opennextjs-cloudflare build",
-    "deploy": "wrangler deploy",
-    "start": "next start",
-    "lint": "eslint .",
-    "clean": "next clean"
-  },
+  "dev": "next dev",
+  "build": "next build",
+  "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+  "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+  "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
+  "lint": "eslint ."
+},
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
     "@types/canvas-confetti": "^1.9.0",
